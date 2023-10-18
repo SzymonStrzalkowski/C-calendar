@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 //struct {
-//string line[5]={"|Su|Mo|Tu|We|Th|Fr|Sa|","+--+--+--+--+--+--+--+","|  ","| ","|"};
+//char line[5]={"|Su|Mo|Tu|We|Th|Fr|Sa|","+--+--+--+--+--+--+--+","|  ","| ","|"};
 //}calendartop;
 
 int leap_year_check(int febuary,int** year){
@@ -22,17 +22,24 @@ void printcal(int* year,int *month){
 	int months[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 	months[1]=leap_year_check(months[1],&year);
 	int first_day=first_day_of_the_year(&year);
-	printf("%d\n",first_day);
 	for(int i=0;i!=*month-1;i++){
 		first_day+=months[i];
 		first_day%=7;
 	}
+	for(int i=0;i<7;i++){
+		printf("|%c%c",day[i][0],day[i][1]);
+		switch(i){
+			case 6:
+			printf("|\n");
+		}
+	}
+	printf("+--+--+--+--+--+--+--+\n");
 	switch(first_day){
 		case 0:
 			break;
 		default:
 			for(int i=0;i<first_day;i++){
-				printf("|%c%c",day[i][0],day[i][1]);
+				printf("|  ");
 			}
 	}
 
